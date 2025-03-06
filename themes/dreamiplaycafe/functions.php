@@ -138,7 +138,8 @@ add_action( 'widgets_init', 'dreami_widgets_init' );
  * Enqueue scripts and styles.
  */
 function dreami_scripts() {
-	wp_enqueue_style( 'dreami-tailwind', get_template_directory_uri() . '/src/output.css', array(), _S_VERSION );
+	wp_enqueue_style( 'dreami-tailwind', get_template_directory_uri() . '/styles/output.min.css', array(), _S_VERSION );
+	// wp_enqueue_style('dreami-tailwind', get_template_directory_uri() . '/src/output.css', array(), _S_VERSION);
 	wp_enqueue_style( 'dreami-global', get_template_directory_uri() . '/styles/global.css', array(), _S_VERSION );
 	wp_enqueue_style( 'dreami-style', get_stylesheet_uri(), array(), _S_VERSION );
 	wp_enqueue_script( 'jquery' );

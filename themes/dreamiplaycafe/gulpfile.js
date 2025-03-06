@@ -9,21 +9,25 @@ const sourcemaps = require("gulp-sourcemaps");
 const browserSync = require("browser-sync").create();
 const { exec } = require("child_process");
 
+// Compile Global SCSS
 function globalCss() {
   return gulp
     .src("./src/global.scss")
-    .pipe(sass({}).on("error", sass.logError))
+    .pipe(sass().on("error", sass.logError))
     .pipe(gulp.dest("./css"))
     .pipe(browserSync.stream());
 }
 
+// Concatenate JS files
 function jsConcat() {
   return gulp
     .src(["./js/libs.js", "./js/main.js"])
     .pipe(concat("scripts.js"))
-    .pipe(gulp.dest("./js"));
+    .pipe(gulp.dest("./js"))
+    .pipe(browserSync.stream());
 }
 
+// Minify JavaScript
 function packJs() {
   return gulp
     .src(["./js/scripts.js"])
@@ -36,51 +40,57 @@ function packJs() {
         noSource: true,
       })
     )
-    .pipe(gulp.dest("./js"));
+    .pipe(gulp.dest("./js"))
+    .pipe(browserSync.stream());
 }
 
+// Minify CSS
 function packCss() {
   return gulp
     .src(["./css/global.css"])
     .pipe(sourcemaps.init())
     .pipe(cleanCss())
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest("./styles"));
+    .pipe(gulp.dest("./styles"))
+    .pipe(browserSync.stream());
 }
 
-function tailwindCss() {
-  return new Promise((resolve, reject) => {
-    exec(
-      "npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css",
-      (error, stdout, stderr) => {
-        if (error) {
-          console.error(`Error: ${error}`);
-          reject(error);
-        } else {
-          console.log(`Tailwind CSS compiled successfully`);
-          resolve();
-        }
+// Compile Tailwind CSS
+function tailwindCss(done) {
+  exec(
+    "npx tailwindcss -i ./src/input.css -o ./styles/output.min.css --minify",
+    (error, stdout, stderr) => {
+      if (error) {
+        console.error(`Tailwind Error: ${error}`);
+        done(error);
+      } else {
+        console.log(`Tailwind CSS compiled successfully`);
+        browserSync.reload();
+        done();
       }
-    );
-  });
+    }
+  );
 }
 
+// Live reload with BrowserSync
 function browserSyncIt() {
   browserSync.init({
     proxy: "https://dreami-wp.web",
-    target: "https://dreami-wp.web",
-    ws: true,
     notify: false,
   });
-  gulp.watch("./sass/*.scss", gulp.series(["globalCss", "packCss"]));
+
+  // Watch SCSS files
+  gulp.watch("./src/**/*.scss", gulp.series(globalCss, packCss));
+
+  // Watch JS files
+  gulp.watch(["./js/libs.js", "./js/main.js"], gulp.series(jsConcat, packJs));
+
+  // Watch PHP files (triggers Tailwind rebuild)
+  gulp.watch("**/*.php", gulp.series(tailwindCss));
+
+  // Reload on any changes
   gulp
-    .watch("**/*.php", gulp.series(["tailwindCss"]))
-    .on("change", browserSync.reload);
-  gulp
-    .watch(
-      ["./js/libs.js", "./js/main.js"],
-      gulp.series(["jsConcat", "packJs"])
-    )
+    .watch(["./css/**/*.css", "./js/**/*.js"])
     .on("change", browserSync.reload);
 }
 
@@ -91,4 +101,5 @@ exports.packJs = packJs;
 exports.packCss = packCss;
 exports.tailwindCss = tailwindCss;
 
+// Default Gulp Task
 gulp.task("default", browserSyncIt);

@@ -437,6 +437,12 @@
     }
   }
 }
+.test {
+  display: unset;
+}
+.test2 {
+  display: unset;
+}
 @property --tw-rotate-x {
   syntax: "*";
   inherits: false;

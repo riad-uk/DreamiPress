@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+.test {
+    display: unset;
+}
+
+.test2 {
+    display: unset;
+}   
