@@ -5,42 +5,24 @@
     - refs/heads/main
   fail_on_prepare_env_warning: true
   actions:
-  - action: Download files
-    type: DOWNLOAD
+  - action: Transfer files
+    type: TRANSFER
     targets:
     - dreami_dev
-    overwrite: true
-    download_excludes:
-    - '*.log'
-    - .htaccess
-    - sitemap.xml
-    - sitemap.xml.gz
-    - ""
-    - ""
-    - "# WordPress themes (if using child theme, keep parent theme)"
-    - themes/twenty*/
-    - twentytwentyfive
-    - themes/twentytwentyfive
-    - "# Node modules and build files"
-    - node_modules/
-    - npm-debug.log
-    - yarn-debug.log*
-    - yarn-error.log*
-    - ""
-    - "# IDE and editor files"
-    - '*.sublime-project'
-    - '*.sublime-workspace'
-    - .idea/
-    - .vscode/
-    - '*.swp'
-    - '*.swo'
-    - '*~'
-    - ""
-    - "# OS generated files"
-    - .DS_Store
-    - .DS_Store?
-    - ._*
-    - .Spotlight-V100
-    - .Trashes
-    - ehthumbs.db
-    - Thumbs.db
+  - action: Send Microsoft Teams message
+    type: MICROSOFT_TEAMS
+    title: New Dev Deploy
+    content: "[#$BUDDY_RUN_ID] $BUDDY_PIPELINE_NAME execution by [$BUDDY_TRIGGERING_ACTOR]($BUDDY_TRIGGERING_ACTOR_URL)"
+    recipients: ac4e4b2d.sirendesign.co.uk@uk.teams.ms
+  - action: Send Microsoft Teams message-1
+    type: MICROSOFT_TEAMS
+    trigger_time: ON_FAILURE
+    title: ⚠️ Dev Deploy FAILED!!!! ⚠️
+    content: "⚠️ [#$BUDDY_RUN_ID] $BUDDY_PIPELINE_NAME execution by [$BUDDY_TRIGGERING_ACTOR]($BUDDY_TRIGGERING_ACTOR_URL) ⚠️"
+    recipients: ac4e4b2d.sirendesign.co.uk@uk.teams.ms
+  - action: Send email
+    type: EMAIL
+    trigger_time: ON_FAILURE
+    title: "⚠️  DreamiPress Failure Notice ⚠️ / $BUDDY_PIPELINE_NAME execution #$BUDDY_RUN_ID"
+    content: Dev Deployment for DreamiPress has failed!!!!
+    recipients: one@kanane.com
