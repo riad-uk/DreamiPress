@@ -1,3 +1,4 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     "./*.php",
@@ -27,6 +28,12 @@ module.exports = {
     "hover:bg-blue-200",
     "hover:bg-green-200",
     "hover:bg-yellow-200",
+    "text-gray-600",
+    "text-gray-800",
+    "text-3xl",
+    "text-xl",
+    "font-bold",
+    "font-semibold",
   ],
   theme: {
     extend: {
