@@ -1,6 +1,14 @@
-riad {
+.riad {
     display: none;
     & > div {
         display: block;
     }
+}
+
+.test {
+    display: unset;
+}
+
+.test2 {
+    display: unset;
 }
