@@ -202,3 +202,14 @@ function dreamiplaycafe_disable_block_styles() {
 }
 add_action('wp_enqueue_scripts', 'dreamiplaycafe_disable_block_styles', 100);
 
+function remove_jquery_migrate($scripts)
+{
+	if (!is_admin() && isset($scripts->registered['jquery'])) {
+		$scripts->registered['jquery']->deps = array_diff(
+			$scripts->registered['jquery']->deps,
+			['jquery-migrate']
+		);
+	}
+}
+add_action('wp_default_scripts', 'remove_jquery_migrate');
+
