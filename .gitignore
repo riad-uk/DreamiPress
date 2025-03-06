@@ -8,6 +8,7 @@ sitemap.xml.gz
 # WordPress themes (if using child theme, keep parent theme)
 themes/twenty*/
 twentytwentyfive
+themes/twentytwentyfive
 # Node modules and build files
 node_modules/
 npm-debug.log
