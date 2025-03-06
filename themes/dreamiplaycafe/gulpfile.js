@@ -7,7 +7,7 @@ const minify = require("gulp-minify");
 const cleanCss = require("gulp-clean-css");
 const sourcemaps = require("gulp-sourcemaps");
 const browserSync = require("browser-sync").create();
-const { exec } = require('child_process');
+const { exec } = require("child_process");
 
 function globalCss() {
   return gulp
@@ -28,12 +28,14 @@ function packJs() {
   return gulp
     .src(["./js/scripts.js"])
     .pipe(concat("scripts-min.js"))
-    .pipe(minify({
-      ext: {
-        min: '.js'
-      },
-      noSource: true
-    }))
+    .pipe(
+      minify({
+        ext: {
+          min: ".js",
+        },
+        noSource: true,
+      })
+    )
     .pipe(gulp.dest("./js"));
 }
 
@@ -48,15 +50,18 @@ function packCss() {
 
 function tailwindCss() {
   return new Promise((resolve, reject) => {
-    exec('npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css', (error, stdout, stderr) => {
-      if (error) {
-        console.error(`Error: ${error}`);
-        reject(error);
-      } else {
-        console.log(`Tailwind CSS compiled successfully`);
-        resolve();
+    exec(
+      "npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css",
+      (error, stdout, stderr) => {
+        if (error) {
+          console.error(`Error: ${error}`);
+          reject(error);
+        } else {
+          console.log(`Tailwind CSS compiled successfully`);
+          resolve();
+        }
       }
-    });
+    );
   });
 }
 
@@ -68,7 +73,9 @@ function browserSyncIt() {
     notify: false,
   });
   gulp.watch("./sass/*.scss", gulp.series(["globalCss", "packCss"]));
-  gulp.watch("**/*.php", gulp.series(["tailwindCss"])).on("change", browserSync.reload);
+  gulp
+    .watch("**/*.php", gulp.series(["tailwindCss"]))
+    .on("change", browserSync.reload);
   gulp
     .watch(
       ["./js/libs.js", "./js/main.js"],
