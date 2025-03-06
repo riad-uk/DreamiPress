@@ -1,11 +1,11 @@
 module.exports = {
   content: [
     "./*.php",
-    "./page-templates/*.php",
-    "./template-parts/*.php",
-    "./js/*.js",
-    "./inc/*.php",
-    "./templates/*.php",
+    "./page-templates/**/*.php",
+    "./template-parts/**/*.php",
+    "./js/**/*.js",
+    "./inc/**/*.php",
+    "./templates/**/*.php",
     "./woocommerce/**/*.php",
   ],
   safelist: [
@@ -19,6 +19,14 @@ module.exports = {
     "hover:scale-105",
     "transition-transform",
     "duration-300",
+    "grid",
+    "grid-cols-1",
+    "md:grid-cols-3",
+    "gap-4",
+    "rounded-lg",
+    "hover:bg-blue-200",
+    "hover:bg-green-200",
+    "hover:bg-yellow-200",
   ],
   theme: {
     extend: {
