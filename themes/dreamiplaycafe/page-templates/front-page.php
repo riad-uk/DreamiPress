@@ -8,10 +8,12 @@ get_header();
 
 <main id="primary" class="site-main">
 
+<h1>Hello World</h1>
+
 <div class="bg-gradient-to-r from-purple-500 to-pink-500 p-8">
     <div class="container mx-auto">
         <div class="bg-white rounded-lg shadow-xl p-6 transform hover:scale-105 transition-transform duration-300">
-            <h2 class="text-3xl font-bold text-gray-800 mb-4">Tailwind Test Section</h2>
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Tailwind Test Section with Riad</h2>
             <p class="text-gray-600 mb-4">This section tests various Tailwind CSS features:</p>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div class="bg-blue-100 p-4 rounded-lg hover:bg-blue-200 transition-colors">
