@@ -72,3 +72,4 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Announcement bar not found");
   }
 });
+

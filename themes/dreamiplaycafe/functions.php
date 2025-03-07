@@ -142,13 +142,13 @@ function dreami_scripts() {
 	wp_enqueue_style( 'dreami-global', get_template_directory_uri() . '/styles/global.css', array(), _S_VERSION );
 	// wp_enqueue_style( 'dreami-style', get_stylesheet_uri(), array(), _S_VERSION );
 	// Enqueue GSAP first
-	wp_enqueue_script( 'gsap', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js', array(), '3.12.7', true );
+	// wp_enqueue_script( 'gsap', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js', array(), '3.12.7', true );
 	
 	// Then jQuery
 	// wp_enqueue_script( 'jquery' );
 	
 	// Finally our custom script
-	wp_enqueue_script( 'dreami-scripts', get_template_directory_uri() . '/js/scripts-min.js', array('gsap'), _S_VERSION, true );
+	wp_enqueue_script( 'dreami-scripts', get_template_directory_uri() . '/js/scripts-min.js', _S_VERSION, true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
