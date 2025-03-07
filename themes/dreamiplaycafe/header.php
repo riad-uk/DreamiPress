@@ -58,8 +58,6 @@
 			</div>
 		<?php endif; ?>
 
-		<h1>Riad is here</h1>
-
 		<header id="masthead" class="site-header">
 			<div class="site-branding">
 				<?php
