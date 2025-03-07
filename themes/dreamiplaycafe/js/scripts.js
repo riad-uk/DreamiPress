@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Create the infinite scroll animation
       const tween = gsap.to(container, {
         x: -totalWidth,
-        duration: 60,
+        duration: 50,
         ease: "none",
         repeat: -1,
         onRepeat: () => {

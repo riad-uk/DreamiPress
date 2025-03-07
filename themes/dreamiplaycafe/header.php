@@ -22,6 +22,7 @@
 	<!-- Favicon -->
 	<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/assets/favicon.ico" type="image/x-icon">
 	<link rel="icon" href="<?php echo get_template_directory_uri(); ?>/assets/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=campaign" />
 
 	<?php wp_head(); ?>
 </head>
@@ -36,27 +37,28 @@
 		$text_colour = get_field('text_colour', 'option') ?: '#FFFFFF'; // Default to white if not set
 		$announcements = get_field('announcements', 'option');
 
+
 		if ($announcements): ?>
 			<div id="announcement-bar" class="relative flex overflow-hidden p-5 text-center" style="background-color: <?php echo esc_attr($background_colour); ?>; color: <?php echo esc_attr($text_colour); ?>;">
 				<div class="announcement-wrapper w-full flex justify-center">
 					<div class="announcement-container flex whitespace-nowrap">
 						<?php foreach ($announcements as $announcement): ?>
-							<div class="announcement-message mr-8 md:text-lg">
+							<div class="announcement-message mr-8 md:text-s">
 								<?php echo wp_kses_post($announcement['banner_message']); ?>
 							</div>
 						<?php endforeach; ?>
 						<?php foreach ($announcements as $announcement): ?>
-							<div class="announcement-message mr-8 md:text-lg">
+							<div class="announcement-message mr-8 md:text-s">
 								<?php echo wp_kses_post($announcement['banner_message']); ?>
 							</div>
 						<?php endforeach; ?>
 						<?php foreach ($announcements as $announcement): ?>
-							<div class="announcement-message mr-8 md:text-lg">
+							<div class="announcement-message mr-8 md:text-s">
 								<?php echo wp_kses_post($announcement['banner_message']); ?>
 							</div>
 						<?php endforeach; ?>
 						<?php foreach ($announcements as $announcement): ?>
-							<div class="announcement-message mr-8 md:text-lg">
+							<div class="announcement-message mr-8 md:text-s">
 								<?php echo wp_kses_post($announcement['banner_message']); ?>
 							</div>
 						<?php endforeach; ?>
