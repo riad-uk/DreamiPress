@@ -1,0 +1,5 @@
+.announcement-container {
+  display: flex;
+  white-space: nowrap;
+  min-width: 100%; /* Ensure it's not shrinking */
+}
