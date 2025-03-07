@@ -52,16 +52,7 @@
 								<?php echo wp_kses_post($announcement['banner_message']); ?>
 							</div>
 						<?php endforeach; ?>
-						<?php foreach ($announcements as $announcement): ?>
-							<div class="announcement-message mr-8 md:text-s">
-								<?php echo wp_kses_post($announcement['banner_message']); ?>
-							</div>
-						<?php endforeach; ?>
-						<?php foreach ($announcements as $announcement): ?>
-							<div class="announcement-message mr-8 md:text-s">
-								<?php echo wp_kses_post($announcement['banner_message']); ?>
-							</div>
-						<?php endforeach; ?>
+						
 					</div>
 				</div>
 			</div>
