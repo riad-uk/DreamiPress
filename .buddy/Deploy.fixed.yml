@@ -7,19 +7,22 @@
   actions:
   - action: Transfer files
     type: TRANSFER
+    local_path: /
     targets:
     - dreami_dev
-  - action: Send Microsoft Teams message
-    type: MICROSOFT_TEAMS
-    title: New Dev Deploy
-    content: "[#$BUDDY_RUN_ID] $BUDDY_PIPELINE_NAME execution by [$BUDDY_TRIGGERING_ACTOR]($BUDDY_TRIGGERING_ACTOR_URL)"
-    recipients: ac4e4b2d.sirendesign.co.uk@uk.teams.ms
-  - action: Send Microsoft Teams message-1
-    type: MICROSOFT_TEAMS
+  - action: Send notification
+    type: SLACK
+    content: "[#$BUDDY_RUN_ID] $BUDDY_PIPELINE_NAME execution by RIAD successfully ✅"
+    blocks: "[\n\t{\n\t\t\"type\": \"section\",\n\t\t\"fields\": [\n\t\t\t{\n\t\t\t\t\"type\": \"mrkdwn\",\n\t\t\t\t\"text\": \"*Successful run:* <$BUDDY_RUN_URL|Execution #$BUDDY_RUN_ID $BUDDY_RUN_COMMENT>\"\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"type\": \"mrkdwn\",\n\t\t\t\t\"text\": \"*Pipeline:* <$BUDDY_PIPELINE_URL|$BUDDY_PIPELINE_NAME>\"\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"type\": \"mrkdwn\",\n\t\t\t\t\"text\": \"*Ref:* $BUDDY_PIPELINE_REFS\"\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"type\": \"mrkdwn\",\n\t\t\t\t\"text\": \"*Project:* <$BUDDY_PROJECT_URL|$BUDDY_PROJECT_NAME>\"\n\t\t\t}\n\t\t]\n\t}\n]"
+    channel: deploy
+    integration: Nz7x3VXyMYerB4LweOBQn6LlRG
+  - action: Send notification-1
+    type: SLACK
     trigger_time: ON_FAILURE
-    title: ⚠️ Dev Deploy FAILED!!!! ⚠️
-    content: "⚠️ [#$BUDDY_RUN_ID] $BUDDY_PIPELINE_NAME execution by [$BUDDY_TRIGGERING_ACTOR]($BUDDY_TRIGGERING_ACTOR_URL) ⚠️"
-    recipients: ac4e4b2d.sirendesign.co.uk@uk.teams.ms
+    content: "⛔ [#$BUDDY_RUN_ID] $BUDDY_PIPELINE_NAME execution by RIAD has FAILED!!! ⚠️⚠️⚠️ WARNING!!!! ⚠️⚠️⚠️"
+    blocks: "[\n\t{\n\t\t\"type\": \"section\",\n\t\t\"fields\": [\n\t\t\t{\n\t\t\t\t\"type\": \"mrkdwn\",\n\t\t\t\t\"text\": \"*Failed run:* <$BUDDY_RUN_URL|Execution #$BUDDY_RUN_ID $BUDDY_RUN_COMMENT>\"\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"type\": \"mrkdwn\",\n\t\t\t\t\"text\": \"*Pipeline:* <$BUDDY_PIPELINE_URL|$BUDDY_PIPELINE_NAME>\"\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"type\": \"mrkdwn\",\n\t\t\t\t\"text\": \"*Ref:* $BUDDY_PIPELINE_REFS\"\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"type\": \"mrkdwn\",\n\t\t\t\t\"text\": \"*Project:* <$BUDDY_PROJECT_URL|$BUDDY_PROJECT_NAME>\"\n\t\t\t}\n\t\t]\n\t}\n]"
+    channel: deploy
+    integration: Nz7x3VXyMYerB4LweOBQn6LlRG
   - action: Send email
     type: EMAIL
     trigger_time: ON_FAILURE

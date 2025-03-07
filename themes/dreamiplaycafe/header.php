@@ -29,7 +29,43 @@
 <body <?php body_class(); ?>>
 	<?php wp_body_open(); ?>
 	<div id="page" class="site">
-		<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e('Skip to content', 'dreami'); ?></a>
+
+		<!-- announcement bar -->
+		<?php
+		$background_colour = get_field('background_colour', 'option') ?: '#3B82F6'; // Default to blue-500 if not set
+		$text_colour = get_field('text_colour', 'option') ?: '#FFFFFF'; // Default to white if not set
+		$announcements = get_field('announcements', 'option');
+
+		if ($announcements): ?>
+			<div id="announcement-bar" class="relative flex overflow-hidden p-5 text-center" style="background-color: <?php echo esc_attr($background_colour); ?>; color: <?php echo esc_attr($text_colour); ?>;">
+				<div class="announcement-wrapper w-full flex justify-center">
+					<div class="announcement-container flex whitespace-nowrap">
+						<?php foreach ($announcements as $announcement): ?>
+							<div class="announcement-message mr-8 md:text-lg">
+								<?php echo wp_kses_post($announcement['banner_message']); ?>
+							</div>
+						<?php endforeach; ?>
+						<?php foreach ($announcements as $announcement): ?>
+							<div class="announcement-message mr-8 md:text-lg">
+								<?php echo wp_kses_post($announcement['banner_message']); ?>
+							</div>
+						<?php endforeach; ?>
+						<?php foreach ($announcements as $announcement): ?>
+							<div class="announcement-message mr-8 md:text-lg">
+								<?php echo wp_kses_post($announcement['banner_message']); ?>
+							</div>
+						<?php endforeach; ?>
+						<?php foreach ($announcements as $announcement): ?>
+							<div class="announcement-message mr-8 md:text-lg">
+								<?php echo wp_kses_post($announcement['banner_message']); ?>
+							</div>
+						<?php endforeach; ?>
+					</div>
+				</div>
+			</div>
+		<?php endif; ?>
+
+		<h1>Riad is here</h1>
 
 		<header id="masthead" class="site-header">
 			<div class="site-branding">
